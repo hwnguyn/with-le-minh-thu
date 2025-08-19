@@ -2,16 +2,16 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>OPIUOI</title>
   <style>
     :root { --bg1: #0b1220; --bg2: #1b2735; --accent: #ffccd5 }
     html, body { height: 100%; margin: 0; }
     body {
       margin: 0;
-      min-height: 100vh;
+      height: 100vh;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
-      overflow: hidden;
+      overflow-x: hidden;
       font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -31,19 +31,18 @@
 
     .phrase {
       position: absolute;
-      font-size: clamp(14px, 4vw, 20px);
+      font-size: clamp(12px, 3.5vw, 20px);
       font-weight: 500;
       background: rgba(255, 192, 203, 0.2);
       border: 1px solid rgba(255, 192, 203, 0.6);
       border-radius: 20px;
-      padding: 8px 12px;
+      padding: 6px 10px;
       color: var(--accent);
       text-shadow: 0 0 6px rgba(255, 192, 203, 0.8);
       animation: fall linear forwards;
       pointer-events: none;
       max-width: 90vw;
-      white-space: normal;
-      word-break: break-word;
+      word-wrap: break-word;
       text-align: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
@@ -53,7 +52,9 @@
       100% { transform: translateY(110vh); opacity: 0 }
     }
 
-    @media (max-width: 420px) { .phrase { font-size: 12px; } }
+    @media (max-width: 420px) { 
+      .phrase { font-size: 11px; padding: 5px 8px; } 
+    }
   </style>
 </head>
 <body>
@@ -73,14 +74,9 @@
         const text = phrases[Math.floor(Math.random() * phrases.length)];
         phrase.textContent = text;
 
-        if (text.length > 20) {
-          phrase.style.left = (40 + Math.random() * 20) + 'vw';
-        } else {
-          phrase.style.left = (20 + Math.random() * 60) + 'vw';
-        }
-
+        phrase.style.left = (10 + Math.random() * 80) + 'vw';
         phrase.style.top = '-5vh';
-        phrase.style.animationDuration = (10 + Math.random() * 5) + 's'; // chậm hơn
+        phrase.style.animationDuration = (6 + Math.random() * 4) + 's'; // tốc độ nhanh hơn
         container.appendChild(phrase);
 
         setTimeout(() => {
@@ -104,7 +100,7 @@
 
       createStars(90);
       for (let i = 0; i < 6; i++) setTimeout(createPhrase, i * 500);
-      setInterval(createPhrase, 1500); // tạo chậm hơn
+      setInterval(createPhrase, 1500);
     });
   </script>
 </body>
