@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>OPIUOI</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 0.2; }
+    }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .phrase {
+      position: absolute;
+      font-size: 20px;
+      font-weight: bold;
+      color: #ffccd5;
+      text-shadow: 0 0 10px rgba(255, 192, 203, 0.8);
+      animation: fall linear forwards;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="container"></div>
+
+  <script>
+    const phrases = [
+      "Cảm ơn vì đã đợi",
+      "Ăn nhiều lên cho mau lớn nhé",
+      "Thơm gió môi em một cái",
+      "Tập đi ngủ sớm đi",
+      "Ngủ muộn hại sức khỏe lắm",
+      "Mình ộp mệt là được rồi",
+      "ộp luôn ở đây",
+      "Phạm Thu Hằng rất ngoan",
+      "Bảo bối à, tôi tự hào về em",
+      "ộp sẽ luôn ở đây",
+      "ộp iu đâyyyy",
+      "Mèo iu đâu ồi",
+      "Chị Phạm Thu Hằng mãi đỉnh",
+      "Không ai tự hào về chị, thì nay có em rồi",
+      "Đừng bỏ cuộc",
+      "new york city là đồ cờ hó",
+      "Em sẽ bảo vệ chị",
+      "Chị bảo kê đàn em này nhé",
+      "Tiểu bảo bốiiii",
+      "Mèo ơiiiii",
+      "Mèo ơi ộp đây",
+      "Có gì kể ộp nghe điiii",
+      "Chị thích là được",
+      "Vì chị xứng đáng",
+      "Mèoooo",
+      "Em ở đây nè",
+      "Ôm cái nè",
+      "Xoa xoa cái bụng cho đỡ đau nè",
+      "Ngủ sớm đi bảo bối",
+      "Tôi nhắc em"
+    ];
+
+    const container = document.getElementById('container');
+    let lastPositions = [];
+
+    function isOverlapping(x, y) {
+      return lastPositions.some(pos => Math.abs(pos.x - x) < 150 && Math.abs(pos.y - y) < 40);
+    }
+
+    function createPhrase() {
+      let x, y;
+      let attempts = 0;
+      do {
+        x = Math.random() * 90;
+        y = -10;
+        attempts++;
+      } while (isOverlapping(x, y) && attempts < 10);
+      lastPositions.push({x, y});
+
+      const phrase = document.createElement('div');
+      phrase.className = 'phrase';
+      phrase.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+      phrase.style.left = x + 'vw';
+      phrase.style.top = y + 'vh';
+      phrase.style.animationDuration = (5 + Math.random() * 5) + 's';
+      container.appendChild(phrase);
+
+      setTimeout(() => {
+        phrase.remove();
+        lastPositions = lastPositions.filter(pos => pos.x !== x || pos.y !== y);
+      }, 10000);
+    }
+
+    function createStars(count) {
+      for (let i = 0; i < count; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 3 + 1 + 'px';
+        star.style.width = size;
+        star.style.height = size;
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+        document.body.appendChild(star);
+      }
+    }
+
+    createStars(100);
+    setInterval(createPhrase, 800);
+  </script>
+</body>
+</html>
