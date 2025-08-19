@@ -2,143 +2,110 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
   <title>OPIUOI</title>
   <style>
+    :root { --bg1: #0b1220; --bg2: #1b2735; --accent: #ffccd5 }
+    html, body { height: 100%; margin: 0; }
     body {
       margin: 0;
-      height: 100vh;
+      min-height: 100vh;
       background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
+
     .star {
       position: absolute;
       background: white;
       border-radius: 50%;
       opacity: 0.8;
       animation: twinkle 2s infinite ease-in-out;
-    }
-    @keyframes twinkle {
-      0%, 100% { opacity: 0.8; }
-      50% { opacity: 0.2; }
-    }
-    .container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-    .phrase {
-      position: absolute;
-      font-size: 20px;
-      font-weight: bold;
-      color: #ffccd5;
-      text-shadow: 0 0 10px rgba(255, 192, 203, 0.8);
-      animation: fall linear forwards;
-      white-space: nowrap;
       pointer-events: none;
     }
-    @keyframes fall {
-      0% {
-        transform: translateY(-50px);
-        opacity: 0;
-      }
-      10% {
-        opacity: 1;
-      }
-      100% {
-        transform: translateY(110vh);
-        opacity: 0;
-      }
+    @keyframes twinkle { 0%, 100% { opacity: 0.8 } 50% { opacity: 0.2 } }
+
+    .container { position: relative; width: 100%; height: 100vh; overflow: hidden }
+
+    .phrase {
+      position: absolute;
+      font-size: clamp(14px, 4vw, 20px);
+      font-weight: 500;
+      background: rgba(255, 192, 203, 0.2);
+      border: 1px solid rgba(255, 192, 203, 0.6);
+      border-radius: 20px;
+      padding: 8px 12px;
+      color: var(--accent);
+      text-shadow: 0 0 6px rgba(255, 192, 203, 0.8);
+      animation: fall linear forwards;
+      pointer-events: none;
+      max-width: 90vw;
+      white-space: normal;
+      word-break: break-word;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
+    @keyframes fall {
+      0% { transform: translateY(-50px); opacity: 0 }
+      10% { opacity: 1 }
+      100% { transform: translateY(110vh); opacity: 0 }
+    }
+
+    @media (max-width: 420px) { .phrase { font-size: 12px; } }
   </style>
 </head>
 <body>
   <div class="container" id="container"></div>
 
   <script>
-    const phrases = [
-      "Cảm ơn vì đã không bỏ cuộc",
-      "Ăn nhiều lên cho mau lớn nhé",
-      "Chị Thư xinh thíiiii",
-      "Đừng bỏ bữaaaa",
-      "Chị Lê Minh Thư đẹp nhất lòng ộppp",
-      "Mình ộp mệt là được rồi",
-      "ộp luôn ở đây",
-      "Chị Lê Minh Thư rất ngoan",
-      "Chị à, tôi tự hào về chị",
-      "ộp sẽ luôn ở đây",
-      "ộp iu đâyyyy",
-      "Ộp iu đây ồi",
-      "Chị Lê Minh Thư mãi đỉnh",
-      "Không ai tự hào về chị, thì nay có em rồi",
-      "Đừng bỏ cuộc",
-      "new york city là đồ cờ hó",
-      "Em sẽ bảo vệ chị",
-      "Chị bảo kê đàn em này nhé",
-      "Tiểu bảo bốiiii",
-      "Chị ơiiiii",
-      "Chị ơi ộp đây",
-      "Có gì kể ộp nghe điiii",
-      "Xinh gái đáng yêu thíthí",
-      "Cứng đầu vô cùng luôn đấy",
-      "Chị Thư oiiiii",
-      "Em ở đây nè",
-      "Ôm cái nè",
-      "Xoa xoa cho đỡ mệt nèeee",
-      "Ngủ sớm đi chịiiii",
-      "Tôi nhắc chị",
-      "Chị đẹp lắm",
-      "Gửi chị hàng ngàn cái ôm online"
-    ];
+    document.addEventListener('DOMContentLoaded', () => {
+      const phrases = [
+        "Cảm ơn vì đã không bỏ cuộc","Cứng đầu vô cùng luôn","Ăn nhiều lên cho mau lớn nhé","Đừng bỏ bữaaaa","Thuốc đắng gheeee","Ngủ muộn hại sức khỏe lắm","Mình ộp mệt là được rồi","ộp luôn ở đây","Chị Lê Minh Thư rất ngoan","Chị à, tôi tự hào về chị","ộp sẽ luôn ở đây","ộp iu đâyyyy","Chị đâu ồi","Chị Lê Minh Thư xinh thíiii","Không ai tự hào về chị, thì nay có em rồi","Đừng bỏ cuộc","new york city là đồ cờ hó","Em sẽ bảo vệ chị","Chị bảo kê đàn em này nhé","Tiểu bảo bốiiii","Chị ơiiiii","Chị ơi ộp đây","Có gì kể ộp nghe điiii","Chị xinh lắmmm","Vì chị xứng đáng","Chị Thư oiiii","Em ở đây nè","Ôm cái nè","Xoa xoa cái cho đỡ mệt nèee","Ngủ sớm đi bảo bối","Tôi nhắc chị","Mong mọi điều tốt đẹp sẽ tới với chị","Chị đẹp ơi"
+      ];
 
-    const container = document.getElementById('container');
-    let lastPositions = [];
+      const container = document.getElementById('container');
 
-    function isOverlapping(x, y) {
-      return lastPositions.some(pos => Math.abs(pos.x - x) < 150 && Math.abs(pos.y - y) < 40);
-    }
+      function createPhrase() {
+        const phrase = document.createElement('div');
+        phrase.className = 'phrase';
+        const text = phrases[Math.floor(Math.random() * phrases.length)];
+        phrase.textContent = text;
 
-    function createPhrase() {
-      let x, y;
-      let attempts = 0;
-      do {
-        x = Math.random() * 90;
-        y = -10;
-        attempts++;
-      } while (isOverlapping(x, y) && attempts < 10);
-      lastPositions.push({x, y});
+        if (text.length > 20) {
+          phrase.style.left = (40 + Math.random() * 20) + 'vw';
+        } else {
+          phrase.style.left = (20 + Math.random() * 60) + 'vw';
+        }
 
-      const phrase = document.createElement('div');
-      phrase.className = 'phrase';
-      phrase.textContent = phrases[Math.floor(Math.random() * phrases.length)];
-      phrase.style.left = x + 'vw';
-      phrase.style.top = y + 'vh';
-      phrase.style.animationDuration = (5 + Math.random() * 5) + 's';
-      container.appendChild(phrase);
+        phrase.style.top = '-5vh';
+        phrase.style.animationDuration = (10 + Math.random() * 5) + 's'; // chậm hơn
+        container.appendChild(phrase);
 
-      setTimeout(() => {
-        phrase.remove();
-        lastPositions = lastPositions.filter(pos => pos.x !== x || pos.y !== y);
-      }, 10000);
-    }
-
-    function createStars(count) {
-      for (let i = 0; i < count; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        const size = Math.random() * 3 + 1 + 'px';
-        star.style.width = size;
-        star.style.height = size;
-        star.style.left = Math.random() * 100 + 'vw';
-        star.style.top = Math.random() * 100 + 'vh';
-        star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        document.body.appendChild(star);
+        setTimeout(() => {
+          if (phrase && phrase.parentNode) phrase.parentNode.removeChild(phrase);
+        }, (parseFloat(phrase.style.animationDuration) * 1000) + 500);
       }
-    }
 
-    createStars(100);
-    setInterval(createPhrase, 800);
+      function createStars(count) {
+        for (let i = 0; i < count; i++) {
+          const star = document.createElement('div');
+          star.className = 'star';
+          const size = (Math.random() * 2 + 0.8).toFixed(2) + 'px';
+          star.style.width = size;
+          star.style.height = size;
+          star.style.left = (Math.random() * 100) + 'vw';
+          star.style.top = (Math.random() * 100) + 'vh';
+          star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          document.body.appendChild(star);
+        }
+      }
+
+      createStars(90);
+      for (let i = 0; i < 6; i++) setTimeout(createPhrase, i * 500);
+      setInterval(createPhrase, 1500); // tạo chậm hơn
+    });
   </script>
 </body>
 </html>
